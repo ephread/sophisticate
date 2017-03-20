@@ -1,0 +1,18 @@
+sophisticate:
+  - xpath: "//xmlns:*[@id = 'ocean']"
+    rules:
+      - type: replace
+        attributes:
+          - id: class
+
+  - xpath: "//xmlns:g[@id = 'countries']//xmlns:path"
+    rules:
+      - type: addAttribute
+        attributes:
+          - class: hoverable
+
+  - xpath: "//xmlns:svg//xmlns:*[@style]"
+    rules:
+      - type: removeAttribute
+        attributes:
+          - style
