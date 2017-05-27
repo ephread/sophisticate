@@ -1,13 +1,14 @@
 /**
  * @fileoverview Export all rules
- * @author Frédéric Maquin
+ * @author Frédéric Maquin <fred@ephread.com>
  */
 
-//------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------
 // Public
-//------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------
 
-export * from './addAttribute'
-export * from './removeTag'
-export * from './removeAttribute'
-export * from './replace'
+export * from './addAttribute';
+export * from './deleteAttribute';
+export * from './copyAttribute';
+export * from './renameAttribute';
+export * from './removeTag';

@@ -1,43 +1,43 @@
 /**
  * @fileoverview ARGV parsing helpers.
- * @author Frédéric Maquin
+ * @author Frédéric Maquin <fred@ephread.com>
  */
 
-//------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------
 // Requirements
-//------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------
 
-import FS    from 'fs';
+import FS from 'fs';
 import Chalk from 'chalk';
 import Yargs from 'yargs';
 
-const configDirectory = `${__dirname}/../../config`
+const configDirectory = `${__dirname}/../../config`;
 
-//------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------
 // Helpers
-//------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------
 
 /**
  * parseArgs - Parse the command line arguments using YARGS.
  *
  * @return {Object} parsed arguments
  */
-export function parseArgs() {
+export function parseArgs () {
   var argv =
     Yargs.usage('usage: $0 <svg|html|match> -o <output-directory> [<options>] <svg-file> [<svg-file>]…')
-         .demandCommand(2, "Not enough argument: must provide either the svg, html or match command.")
+         .demandCommand(2, 'Not enough argument: must provide either the svg, html or match command.')
          .help()
          .command('svg', 'Sophisticate the given SVGs', function (yargs) {
            yargs
              .usage('usage: $0 svg <svg> [<svg2>]... -o <output-directory> [-c <config-file>]')
 
              .demandCommand(1, 'Not enough argument: must provide at least one svg file.')
-             .wrap(null)
+             .wrap(null);
 
            configureWithSharedOptions(yargs);
            configureWithProcessOptions(yargs);
          })
-         .command('html', 'Sophisticate the given SVGs and generate a HTML file based on the template.', function(yargs) {
+         .command('html', 'Sophisticate the given SVGs and generate a HTML file based on the template.', function (yargs) {
            yargs
              .usage('usage: $0 html <svg> [<svg2>]... -o <output-directory> [-c <config-file>] [-t <template>]')
 
@@ -45,18 +45,22 @@ export function parseArgs() {
              .nargs('t', 1)
              .describe('t', 'HTML template to use.')
 
+             .alias('s', 'single-file')
+             .nargs('s', 0)
+             .describe('s', 'Merge all given SVG into the same HTML file. The basename of the file can be provided.')
+
              .demandCommand(1, 'Not enough argument: must provide at least one svg file.')
-             .wrap(null)
+             .wrap(null);
 
            configureWithSharedOptions(yargs);
            configureWithProcessOptions(yargs);
          })
-         .command('match', 'Test the specified configuration file against the given SVG.', function(yargs) {
+         .command('match', 'Test the specified configuration file against the given SVG.', function (yargs) {
            yargs
              .usage('usage: $0 match <svg> -c <config-file>')
 
              .demandCommand(1, 'Not enough argument: must provide at least one svg file.')
-             .wrap(null)
+             .wrap(null);
 
            configureWithSharedOptions(yargs);
            yargs.demandOption('c', 'Configuration file is required');
@@ -64,7 +68,7 @@ export function parseArgs() {
          .wrap(null)
          .argv;
 
-  defineDefaults(argv)
+  defineDefaults(argv);
 
   return argv;
 }
@@ -75,23 +79,27 @@ export function parseArgs() {
  * @param  {Object} argv YARGS output
  * @return {Object}      updated YARGS output
  */
-function defineDefaults(argv) {
+function defineDefaults (argv) {
   if (argv.o === undefined) {
     argv.o = process.cwd();
   }
 
   if (argv.c === undefined) {
-    const sophisticateFile = `${process.cwd()}/.sophisticate.yml`
+    const sophisticateFile = `${process.cwd()}/.sophisticate.yml`;
 
     if (FS.existsSync(sophisticateFile)) {
       argv.c = sophisticateFile;
     } else {
-      console.log(`[${Chalk.yellow("WARN")}] no config specified (either from -c or via .sophisticate.yml)`);
+      console.log(`[${Chalk.yellow('WARN')}] no config specified (either from -c or via .sophisticate.yml)`);
     }
   }
 
   if (argv.t === undefined) {
-    argv.t = `${configDirectory}/default-template.ejs`;
+    if (argv.s) {
+      argv.t = `${configDirectory}/default-multi-template.ejs`;
+    } else {
+      argv.t = `${configDirectory}/default-template.ejs`;
+    }
   }
 
   return argv;
@@ -103,7 +111,7 @@ function defineDefaults(argv) {
  * @param  {Object} argv YARGS builder
  * @return {Object}      updated YARGS builder
  */
-function configureWithProcessOptions(yargs) {
+function configureWithProcessOptions (yargs) {
   yargs.alias('o', 'output-directory')
        .nargs('o', 1)
        .describe('o', 'Directory to which output the processed SVGs')
@@ -119,10 +127,10 @@ function configureWithProcessOptions(yargs) {
  * @param  {Object} argv YARGS builder
  * @return {Object}      updated YARGS builder
  */
-function configureWithSharedOptions(yargs) {
+function configureWithSharedOptions (yargs) {
   yargs.alias('c', 'config-file')
        .nargs('c', 1)
-       .describe('c', 'Configuration file with sophistication rules.')
+       .describe('c', 'Configuration file with sophistication rules.');
 
   return yargs;
 }
