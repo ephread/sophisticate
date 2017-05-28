@@ -1,5 +1,5 @@
 {
-  "name": "Sophisticate",
+  "name": "sophisticate",
   "version": "0.1.0",
   "author": "Frédéric Maquin <fred@ephread.com> (http://ephread.com)",
   "description": "Sophisticate the output from SVG editors, to display them within interactive web pages.",
@@ -15,8 +15,8 @@
     "compile": "babel --presets es2015 -d lib/ src/",
     "prepublish": "npm run compile"
   },
-  "bugs": "https://github.com/ephread/Sophisticate/issues",
-  "repository": "ephread/Sophisticate",
+  "bugs": "https://github.com/ephread/sophisticate/issues",
+  "repository": "ephread/sophisticate",
   "devDependencies": {
     "babel-cli": "^6.23.0",
     "babel-core": "^6.23.0",

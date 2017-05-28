@@ -2,7 +2,7 @@ sophisticate:
   # Replace all `id="ocean"` by `class="ocean"`.
   - xpath: "//xmlns:*[@id = 'ocean']"
     rules:
-      - type: replace
+      - type: renameAttribute
         attributes:
           - id: class
 
