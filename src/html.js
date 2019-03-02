@@ -27,13 +27,16 @@ export function sophisticateHTML (argv) {
   console.log('Generating HTML files…');
 
   if (argv.s) {
-    var fileName = (typeof argv.s === "string") ? argv.s : 'inlined-all';
+    var fileName = (typeof argv.s === 'string') ? argv.s : 'inlined-all';
     var processes = [];
 
     for (let path of argv._) {
       processes.push(new Promise(function (resolve, reject) {
         processSVG(path, argv.c, function (result) {
-          resolve(result.data);
+          resolve({
+            name: getBasenameWithoutExtension(path),
+            content: result.data
+          });
         });
       }));
     }
@@ -52,14 +55,14 @@ export function sophisticateHTML (argv) {
 
 /**
  * writeHTML - Sophisticate the SVG files and generate the containing
- *                    HTML file from the template.
+ *             HTML file from the template.
  *
  * @param {object} argv parsed command line arguments.
  * @param {string} path path to the original SVG file OR basename of the HTML file to write.
  * @param {object|string} svg svg object to write into the HTML template.
  */
 function writeHTML (argv, path, svg) {
-  let filename = `${argv.o}/${Path.basename(path).replace(/\.[^/.]+$/, '')}.html`;
+  let filename = `${argv.o}/${getBasenameWithoutExtension(path)}.html`;
 
   Ejs.renderFile(argv.t, {svg: svg}, function (err, str) {
     if (err) {
@@ -76,4 +79,14 @@ function writeHTML (argv, path, svg) {
       }
     });
   });
+}
+
+/**
+ * getBasenameWithoutExtension - Return the basename without extension, from the given path.
+ *
+ * @param {string} path path to reduce.
+ * @return {string} basename without extension
+ */
+function getBasenameWithoutExtension (path) {
+  return Path.basename(path).replace(/\.[^/.]+$/, '');
 }

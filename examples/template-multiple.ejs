@@ -7,9 +7,9 @@
                                  maximum-scale=1.0">
 </head>
 <body>
-  <% svg.forEach(function(svgElement, index){ %>
+  <% svg.forEach(function(svgElement.name, index) { %>
     <div class="<%= (index % 2 == 0 ? 'even' : 'odd') %>">
-      <%- svgElement %>
+      <%- svgElement.content %>
     </div>
   <% }); %>
 </body>
