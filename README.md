@@ -4,14 +4,14 @@
 [![codecov](https://codecov.io/gh/ephread/sophisticate/branch/master/graph/badge.svg)](https://codecov.io/gh/sophisticate)
 [![npm version](https://img.shields.io/npm/v/sophisticate.svg)](https://www.npmjs.com/package/sophisticate)
 [![Install Size](https://packagephobia.now.sh/badge?p=sophisticate)](https://packagephobia.now.sh/result?p=sophisticate)
-[![Dependencies](https://david-dm.org/ephread/sophisticate/status.svg)](https://david-dm.org/ephread/isophisticate)
+[![Dependencies](https://david-dm.org/ephread/sophisticate/status.svg)](https://david-dm.org/ephread/sophisticate)
 [![Install Size](https://img.shields.io/npm/l/sophisticate.svg)](https://github.com/ephread/sophisticate/blob/master/LICENSE)
 
 Sophisticate the SVG outputs of vector graphic editors.
 
 Outputs from vector graphic editor can be messy and require significant hand-made changes to become animatable and interactive. Sophisticate automates these changes.
 
-**⚠️ Until Sophisticate reaches 1.0.0, the configuration file syntax and the command line interface may change.**
+**⚠️ Until Sophisticate reaches 1.0.0, the configuration file syntax and the command line interface may change without notice.**
 
 ## Table of contents
 
