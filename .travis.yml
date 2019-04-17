@@ -1,0 +1,25 @@
+language: node_js
+
+node_js:
+  - "node"
+
+cache:
+  directories:
+    - $HOME/.npm
+
+before_install:
+  - npm install -g npm typescript ts-lint
+
+install:
+  - npm install
+
+script:
+  - npm run-script build
+  - npm run-script lint
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
+
+branches:
+- master
+- ci
