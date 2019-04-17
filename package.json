@@ -17,6 +17,7 @@
   },
   "scripts": {
     "build": "tsc -p ./",
+    "watch": "tsc -w -p ./",
     "lint": "tslint -c tslint.json 'src/**/*.ts'"
   },
   "bugs": "https://github.com/ephread/sophisticate/issues",
