@@ -1,6 +1,6 @@
 {
   "name": "sophisticate",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "author": "Frédéric Maquin <fred@ephread.com> (http://ephread.com)",
   "description": "Sophisticate the output from SVG editors, to display them within interactive web pages.",
   "keywords": [

@@ -1,2 +1,14 @@
 # .npmignore - the files to not push to NPM
 src/
+examples/
+
+*.js.map
+
+tslint.json
+tsconfig.json
+.editorconfig
+.node-version
+.prettierrc
+.travis.yml
+
+*.tgz
