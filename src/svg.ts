@@ -7,10 +7,10 @@
 // Requirements
 // ----------------------------------------------------------------------------
 
-import FS from 'fs';
-import Chalk from 'chalk';
-import Path from 'path';
-import { processSVG } from './inline-svg';
+import Chalk from "chalk";
+import * as FS from "fs";
+import * as Path from "path";
+import { processSVG } from "./inline-svg";
 
 // ----------------------------------------------------------------------------
 // Public
@@ -21,18 +21,18 @@ import { processSVG } from './inline-svg';
  *
  * @param {type} argv parsed command line arguments.
  */
-export function sophisticateSVG (argv) {
-  console.log('Processing files…');
-  for (let path of argv._) {
-    processSVG(path, argv.c, function (result) {
-      let filename = `${argv.c}/sophisticated_${Path.basename(path)}`;
+export function sophisticateSVG(argv: any) {
+  console.log("Processing files…");
+  for (const path of argv._) {
+    processSVG(path, argv.c).then((result) => {
+      const filename = `${argv.c}/sophisticated_${Path.basename(path)}`;
 
-      FS.writeFile(filename, result.data, function (err) {
+      FS.writeFile(filename, result.data, (err) => {
         if (err) {
-          console.log(`[${Chalk.red('ERROR')}] Couldn't write processed SVG file - ${err.message}`);
+          console.log(`[${Chalk.red("ERROR")}] Couldn't write processed SVG file - ${err.message}`);
           process.exit(1);
         } else {
-          console.log(`${Chalk.green('DONE!')} - Output: ${filename}\n`);
+          console.log(`${Chalk.green("DONE!")} - Output: ${filename}\n`);
         }
       });
     });

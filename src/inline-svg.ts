@@ -7,13 +7,13 @@
 // Requirements
 // ----------------------------------------------------------------------------
 
-import FS from 'fs';
-import LibXmlJs from 'libxmljs';
-import SVGO from 'svgo';
-import Yaml from 'js-yaml';
-import Chalk from 'chalk';
+import Chalk from "chalk";
+import * as FS from "fs";
+import * as Yaml from "js-yaml";
+import * as LibXmlJs from "libxmljs";
+import * as SVGO from "svgo";
 
-import * as Rules from './rules/all-rules';
+import { Rules } from "./rules/all-rules";
 
 // ----------------------------------------------------------------------------
 // Public
@@ -31,26 +31,30 @@ import * as Rules from './rules/all-rules';
  *
  * @param  {string}          svgPath    path the svg file.
  * @param  {string}          configPath path to the configuration file.
- * @param  {processCallback} callback   handles the completion of the process.
  */
-export function processSVG (svgPath, configPath, callback) {
-  FS.readFile(svgPath, 'utf-8', function (err, data) {
-    if (err) {
-      console.log(`[${Chalk.red('ERROR')}] Couldn't read SVG file - ${err.message}`);
-      process.exit(1);
-    }
+export function processSVG(svgPath: string, configPath: string) {
+  return new Promise<string>((resolve, reject) => {
+    FS.readFile(svgPath, "utf-8", (err, data) => {
+      if (err) {
+        console.log(`[${Chalk.red("ERROR")}] Couldn't read SVG file - ${err.message}`);
+        // reject()
+        process.exit(1);
+      }
 
+      resolve(data);
+    });
+  }).then((result) => {
     const config = loadConfig(configPath);
-    const xml = LibXmlJs.parseXml(data);
+    const xml = LibXmlJs.parseXml(result);
     const svgo = new SVGO(config.svgo);
 
-    for (let transformation of config.sophisticate) {
-      for (let rule of transformation.rules) {
+    for (const transformation of config.sophisticate) {
+      for (const rule of transformation.rules) {
         applyTransform(xml, transformation.xpath, rule);
       }
     }
 
-    svgo.optimize(xml.toString(false), callback);
+    return svgo.optimize(xml.toString(false));
   });
 }
 
@@ -65,14 +69,19 @@ export function processSVG (svgPath, configPath, callback) {
  * @param  {string} xpath the xpath query selecting the nodes to transform
  * @param  {object} rule  the transformation rule
  */
-function applyTransform (xml, xpath, rule) {
-  const namespace = 'http://www.w3.org/2000/svg';
-  const nodes = xml.find(xpath, namespace);
+function applyTransform(
+  xml: LibXmlJs.Document,
+  xpath: string,
+  rule: IConfigurationRule,
+) {
+  const namespace = "http://www.w3.org/2000/svg";
+  const nodes = xml.root()!.find(xpath, namespace) as LibXmlJs.Element[]; // TODO: Handle null
 
   if (rule.type in Rules) {
-    Rules[rule.type](rule, nodes);
+    const ruleFunction = Rules[rule.type];
+    ruleFunction(rule, nodes);
   } else {
-    console.log(`[${Chalk.red('ERROR')}] Rule '${rule.type}' doesn't exist.`);
+    console.log(`[${Chalk.red("ERROR")}] Rule '${rule.type}' doesn't exist.`);
     process.exit(1);
   }
 }
@@ -83,23 +92,23 @@ function applyTransform (xml, xpath, rule) {
  * @param  {string} configPath the path to the configuration file
  * @return {object}            the loaded configuration
  */
-function loadConfig (configPath) {
+function loadConfig(configPath: string) {
   try {
-    var config;
+    let config;
 
     if (configPath !== undefined) {
-      config = Yaml.safeLoad(FS.readFileSync(configPath, 'utf8'));
+      config = Yaml.safeLoad(FS.readFileSync(configPath, "utf8"));
     } else {
       config = { sophisticate: [] };
     }
 
     if (config.svgo === undefined) {
-      config.svgo = Yaml.safeLoad(FS.readFileSync(`${__dirname}/../../config/svgo.yml`, 'utf8'));
+      config.svgo = Yaml.safeLoad(FS.readFileSync(`${__dirname}/../../config/svgo.yml`, "utf8"));
     }
 
     return config;
   } catch (err) {
-    console.log(`[${Chalk.red('ERROR')}] Couldn't load config file - ${err.message}`);
+    console.log(`[${Chalk.red("ERROR")}] Couldn't load config file - ${err.message}`);
     process.exit(1);
   }
 }

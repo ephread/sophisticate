@@ -3,6 +3,10 @@
  * @author Frédéric Maquin <fred@ephread.com>
  */
 
+import { IConfigurationRemoveTagRule } from "./types";
+
+import * as LibXmlJs from "libxmljs";
+
 // ----------------------------------------------------------------------------
 // Public
 // ----------------------------------------------------------------------------
@@ -13,6 +17,9 @@
  * @param {object} rule  rule definition
  * @param {object} nodes nodes to remove
  */
-export function removeTag (rule, nodes) {
-  nodes.forEach(node => node.remove());
+export function removeTag(
+  rule: IConfigurationRule,
+  nodes: LibXmlJs.Element[],
+) {
+  nodes.forEach((node) => node.remove());
 }

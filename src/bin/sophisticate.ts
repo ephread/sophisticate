@@ -3,20 +3,20 @@
  * @author Frédéric Maquin <fred@ephread.com>
  */
 
-import { parseArgs } from '../cli-helpers';
-import { sophisticateHTML } from '../html';
-import { sophisticateSVG } from '../svg';
-import { match } from '../match';
+import { parseArgs } from "../cli-helpers";
+import { sophisticateHTML } from "../html";
+import { match } from "../match";
+import { sophisticateSVG } from "../svg";
 
 const argv = parseArgs();
 
-if (argv._[0] === 'svg') {
+if (argv._[0] === "svg") {
   argv._.shift();
   sophisticateSVG(argv);
-} else if (argv._[0] === 'html') {
+} else if (argv._[0] === "html") {
   argv._.shift();
   sophisticateHTML(argv);
-} else if (argv._[0] === 'match') {
+} else if (argv._[0] === "match") {
   argv._.shift();
   match(argv);
 } else {

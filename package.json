@@ -4,36 +4,37 @@
   "author": "Frédéric Maquin <fred@ephread.com> (http://ephread.com)",
   "description": "Sophisticate the output from SVG editors, to display them within interactive web pages.",
   "keywords": [
-    "SVG", "svg", "transform",
-    "preprocess", "process",
-    "convert", "prepare"
+    "SVG",
+    "svg",
+    "transform",
+    "preprocess",
+    "process",
+    "convert",
+    "prepare"
   ],
   "bin": {
     "sophisticate": "./bin/sophisticate"
   },
   "scripts": {
-    "compile": "babel --presets es2015 -d lib/ src/",
-    "prepublish": "npm run compile"
+    "build": "tsc -p ./",
+    "lint": "tslint -c tslint.json 'src/**/*.ts'"
   },
   "bugs": "https://github.com/ephread/sophisticate/issues",
   "repository": "ephread/sophisticate",
   "devDependencies": {
-    "babel-cli": "^6.23.0",
-    "babel-core": "^6.23.0",
-    "babel-preset-es2015": "^6.22.0",
-    "eslint": "^3.18.0",
-    "eslint-config-standard": "^7.1.0",
-    "eslint-plugin-promise": "^3.5.0",
-    "eslint-plugin-standard": "^2.1.0"
+    "@types/yargs": "^13.0.0",
+    "@types/js-yaml": "^3.12.1",
+    "@types/svgo": "^1.0.1",
+    "@types/ejs": "^2.6.3",
+    "@types/libxmljs": "^0.18.3"
   },
   "dependencies": {
-    "babel-polyfill": "^6.23.0",
-    "chalk": "^1.1.3",
-    "ejs": "^2.5.6",
-    "js-yaml": "^3.8.1",
-    "libxmljs": "^0.18.4",
-    "svgo": "^0.7.2",
-    "yargs": "^6.6.0"
+    "chalk": "2.4.1",
+    "ejs": "^2.6.1",
+    "js-yaml": "^3.13.1",
+    "libxmljs": "^0.19.5",
+    "svgo": "^1.2.1",
+    "yargs": "^13.2.2"
   },
   "license": "MIT"
 }

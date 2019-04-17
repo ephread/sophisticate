@@ -3,6 +3,10 @@
  * @author Frédéric Maquin <fred@ephread.com>
  */
 
+import { IConfigurationRemoveAttributeRule } from "./types";
+
+import * as LibXmlJs from "libxmljs";
+
 // ----------------------------------------------------------------------------
 // Public
 // ----------------------------------------------------------------------------
@@ -13,10 +17,14 @@
  * @param {object} rule  rule definition
  * @param {object} nodes nodes on which remove attributes
  */
-export function deleteAttribute (rule, nodes) {
-  for (let attributeName of rule.attributes) {
-    nodes.forEach(function (node) {
-      let attribute = node.attr(attributeName);
+export function removeAttribute(
+  configurationRule: IConfigurationRule,
+  nodes: LibXmlJs.Element[],
+) {
+  const rule = configurationRule as IConfigurationRemoveAttributeRule;
+  for (const attributeName of rule.attributes) {
+    nodes.forEach((node) => {
+      const attribute = node.attr(attributeName);
 
       if (attribute) {
         attribute.remove();
