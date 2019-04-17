@@ -1,4 +1,5 @@
 #!/usr/bin/env node
-'use strict';
+"use strict";
 
-require('../lib/bin/sophisticate.js');
+// tslint:disable-next-line:no-var-requires
+require("../lib/bin/sophisticate.js");

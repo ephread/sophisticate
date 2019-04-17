@@ -35,10 +35,10 @@ export function addAttribute(
             valueToSet = `${currentValue.value()} ${valueToSet}`;
           }
 
-          path.attr({ attributeName, valueToSet });
+          path.attr({ [attributeName]: valueToSet });
         });
       } else {
-        nodes.forEach((path) => path.attr({ attributeName, value }));
+        nodes.forEach((path) => path.attr({ [attributeName]: value }));
       }
     }
   }

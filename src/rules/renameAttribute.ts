@@ -39,7 +39,7 @@ export function renameAttribute(
       }
 
       const value = attr.value();
-      node.attr({ newAttributeName, value });
+      node.attr({ [newAttributeName]: value });
       attr.remove();
     });
   }

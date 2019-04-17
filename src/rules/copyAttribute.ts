@@ -40,7 +40,7 @@ export function copyAttribute(
       }
 
       const value = attr.value();
-      node.attr({ newAttributeName, value });
+      node.attr({ [newAttributeName]: value });
     });
   }
 }
