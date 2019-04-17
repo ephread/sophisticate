@@ -1,4 +1,4 @@
-# ![Sophisticate](http://i.imgur.com/h5w9KDq.png)
+# ![Sophisticate](https://i.imgur.com/5bZeKDu.png)
 [![Build Status](https://travis-ci.org/ephread/sophisticate.svg?branch=master)](https://travis-ci.org/ephread/sophisticate)
 [![codebeat badge](https://codebeat.co/badges/1ecccdd2-8572-4597-9db5-782584384242)](https://codebeat.co/projects/github-com-ephread-sophisticate-master)
 [![npm version](https://img.shields.io/npm/v/sophisticate.svg)](https://www.npmjs.com/package/sophisticate)
