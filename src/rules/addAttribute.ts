@@ -31,7 +31,7 @@ export function addAttribute(
           const currentValue = path.attr(attributeName);
           let valueToSet = value;
 
-          if (currentValue != null) {
+          if (currentValue != null && currentValue.value() !== valueToSet) {
             valueToSet = `${currentValue.value()} ${valueToSet}`;
           }
 

@@ -19,16 +19,21 @@
     "build": "tsc -p ./",
     "watch": "tsc -w -p ./",
     "lint": "tslint -c tslint.json 'src/**/*.ts'",
-    "prepublishOnly": "npm run-script build"
+    "prepublishOnly": "npm run-script build",
+    "test": "jest"
   },
   "bugs": "https://github.com/ephread/sophisticate/issues",
   "repository": "ephread/sophisticate",
   "devDependencies": {
-    "@types/yargs": "^13.0.0",
-    "@types/js-yaml": "^3.12.1",
-    "@types/svgo": "^1.0.1",
     "@types/ejs": "^2.6.3",
-    "@types/libxmljs": "^0.18.3"
+    "@types/jest": "^24.0.11",
+    "@types/js-yaml": "^3.12.1",
+    "@types/libxmljs": "^0.18.3",
+    "@types/svgo": "^1.0.1",
+    "@types/yargs": "^13.0.0",
+    "jest": "^24.7.1",
+    "ts-jest": "^24.0.2",
+    "typescript": "^3.4.3"
   },
   "dependencies": {
     "chalk": "^2.4.2",
