@@ -5,7 +5,7 @@
 
 import { IConfigurationCopyAttributeRule } from "./types";
 
-import Chalk from "chalk";
+import * as Chalk from "chalk";
 import * as LibXmlJs from "libxmljs";
 
 // ----------------------------------------------------------------------------
@@ -22,7 +22,7 @@ import * as LibXmlJs from "libxmljs";
 export function copyAttribute(
   configurationRule: IConfigurationRule,
   nodes: LibXmlJs.Element[],
-) {
+): void {
   const rule = configurationRule as IConfigurationCopyAttributeRule;
   for (const attribute of rule.attributes) {
     const oldAttributeName = Object.keys(attribute)[0];

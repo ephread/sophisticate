@@ -7,7 +7,7 @@
 // Requirements
 // ----------------------------------------------------------------------------
 
-import Chalk from "chalk";
+import * as Chalk from "chalk";
 import * as FS from "fs";
 import * as Path from "path";
 import { processSVG } from "./inline-svg";
@@ -21,7 +21,7 @@ import { processSVG } from "./inline-svg";
  *
  * @param {type} argv parsed command line arguments.
  */
-export function sophisticateSVG(argv: any) {
+export function sophisticateSVG(argv: any): void {
   console.log("Processing files…");
   for (const path of argv._) {
     processSVG(path, argv.c).then((result) => {
@@ -35,6 +35,8 @@ export function sophisticateSVG(argv: any) {
           console.log(`${Chalk.green("DONE!")} - Output: ${filename}\n`);
         }
       });
+    }).catch(() => {
+      // Do Nothing.
     });
   }
 }

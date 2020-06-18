@@ -20,7 +20,7 @@ import * as LibXmlJs from "libxmljs";
 export function addAttribute(
   configurationRule: IConfigurationRule,
   nodes: LibXmlJs.Element[],
-) {
+): void {
     const rule = configurationRule as IConfigurationAddAttributeRule;
     for (const attribute of rule.attributes) {
       const attributeName = Object.keys(attribute)[0];

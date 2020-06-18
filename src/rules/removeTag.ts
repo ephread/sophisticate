@@ -3,8 +3,6 @@
  * @author Frédéric Maquin <fred@ephread.com>
  */
 
-import { IConfigurationRemoveTagRule } from "./types";
-
 import * as LibXmlJs from "libxmljs";
 
 // ----------------------------------------------------------------------------

@@ -7,7 +7,7 @@
 // Requirements
 // ----------------------------------------------------------------------------
 
-import Chalk from "chalk";
+import * as Chalk from "chalk";
 import * as FS from "fs";
 import * as Yargs from "yargs";
 
@@ -22,7 +22,7 @@ const configDirectory = `${__dirname}/../../config`;
  *
  * @return {Object} parsed arguments
  */
-export function parseArgs() {
+export function parseArgs(): any {
   const argv =
     Yargs.usage("usage: $0 <svg|html|match> -o <output-directory> [<options>] <svg-file> [<svg-file>]…")
          .demandCommand(2, "Not enough argument: must provide either the svg, html or match command.")
@@ -85,7 +85,7 @@ export function parseArgs() {
  * @param  {Object} argv YARGS output
  * @return {Object}      updated YARGS output
  */
-function defineDefaults(argv: any) {
+function defineDefaults(argv: any): any {
   if (argv.o === undefined) {
     argv.o = process.cwd();
   }

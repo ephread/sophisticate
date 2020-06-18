@@ -7,7 +7,7 @@
 // Requirements
 // ----------------------------------------------------------------------------
 
-import Chalk from "chalk";
+import * as Chalk from "chalk";
 import * as FS from "fs";
 import * as Yaml from "js-yaml";
 import * as LibXmlJs from "libxmljs";
@@ -33,7 +33,7 @@ import { Rules } from "./rules/all-rules";
  * @param  {string}          configPath path to the configuration file.
  */
 export function processSVG(svgPath: string, configPath: string) {
-  return new Promise<string>((resolve, reject) => {
+  return new Promise<string>((resolve) => {
     FS.readFile(svgPath, "utf-8", (err, data) => {
       if (err) {
         console.log(`[${Chalk.red("ERROR")}] Couldn't read SVG file - ${err.message}`);

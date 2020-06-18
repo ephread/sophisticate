@@ -7,7 +7,7 @@
 // Requirements
 // ----------------------------------------------------------------------------
 
-import Chalk from "chalk";
+import * as Chalk from "chalk";
 import * as Ejs from "ejs";
 import * as FS from "fs";
 import * as Path from "path";
@@ -23,7 +23,7 @@ import { processSVG } from "./inline-svg";
  *
  * @param {object} argv parsed command line arguments.
  */
-export function sophisticateHTML(argv: any) {
+export function sophisticateHTML(argv: any): any {
   console.log("Generating HTML files…");
 
   if (argv.s) {
@@ -36,11 +36,15 @@ export function sophisticateHTML(argv: any) {
 
     Promise.all(processes).then((data) => {
       writeHTML(argv, fileName, data);
+    }).catch(() => {
+      // Do Nothing
     });
   } else {
     for (const path of argv._) {
       processSVG(path, argv.c).then((result) => {
         writeHTML(argv, path, result.data);
+      }).catch(() => {
+        // Do Nothing
       });
     }
   }
@@ -54,7 +58,7 @@ export function sophisticateHTML(argv: any) {
  * @param {string} path path to the original SVG file OR basename of the HTML file to write.
  * @param {object|string} svg svg object to write into the HTML template.
  */
-function writeHTML(argv: any, path: string, svg: object | string) {
+function writeHTML(argv: any, path: string, svg: any[] | string) {
   const filename = `${argv.o}/${getBasenameWithoutExtension(path)}.html`;
 
   Ejs.renderFile(argv.t, {svg}, (err, str) => {

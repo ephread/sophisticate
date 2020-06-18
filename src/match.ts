@@ -7,7 +7,7 @@
 // Requirements
 // ----------------------------------------------------------------------------
 
-import Chalk from "chalk";
+import * as Chalk from "chalk";
 import * as FS from "fs";
 import * as Yaml from "js-yaml";
 import * as LibXmlJs from "libxmljs";
